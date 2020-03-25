@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>网络流量分析检测系统</title>
+    <script>
+    hide = function(obj){
+        obj.style.visibility="hidden";
+    }
+    </script>
+</head>
+<body>
+{% load static %}
+<div style="background-image: url({% static 'img/beijing2.jpg' %}); width=100%">
+    <div class="container">
+        <div class="row" style="height:30px"></div>
+        <div class="row ">
+            <div class="col-md-6"><h1 style="color:#FFFFFF">网络流量分析检测系统</h1></div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-8"><h4 style="color:#FFFFFF">在线分析流量基本信息 识别可能攻击</h4></div>
+        </div>
+        <br/>
+        <div class="row" style="height:30px"></div>
+    </div>
+</div>
+<br/>
+
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn">
+                    <a href="/dealUpload">重新上传 / 返回主页</a>
+                </button>
+            </div>
+        </div>
+        <br/>
+    </div>
+</div>
+
+<!-- 如果成功 -->
+{% if status %}
+
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <b style="font-size:1.3em">检测结果</b>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            {% if class == 'benign' %}
+            <div class="col-md-6">
+                <div class="alert alert-success">此文件中的流量为良性流量，可以放心啦~</div>
+            </div>
+            {% else %}
+            <div class="col-md-6">
+                <div class="alert alert-danger">此文件中的流量为恶意流量，可能为{{class}}攻击，请小心！</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <b style="font-size:1.3em">统计信息</b>
+            </div>
+        </div>
+
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                文件大小/字节
+            </div>
+            <div class="col-md-3">
+                {{size}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                网络流中数据包个数
+            </div>
+            <div class="col-md-3">
+                {{number}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                网络流持续时间
+            </div>
+            <div class="col-md-3">
+                {{dur}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                源IP地址
+            </div>
+            <div class="col-md-3">
+                {{IP1}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                源端口号
+            </div>
+            <div class="col-md-3">
+                {{port1}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                目的IP地址
+            </div>
+            <div class="col-md-3">
+                {{IP2}}
+            </div>
+        </div>
+        <div class="row" style="padding-up:10px">
+            <div class="col-md-3">
+                目的端口号
+            </div>
+            <div class="col-md-3">
+                {{port2}}
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <b style="font-size:1.3em">详细信息</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Time</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Protocol</th>
+                        <th>Length</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in detail %}
+                    <tr>
+                        <td>{{item.no}}</td>
+                        <td>{{item.ts}}</td>
+                        <td>{{item.src}}</td>
+                        <td>{{item.dst}}</td>
+                        <td>{{item.protocol}}</td>
+                        <td>{{item.len}}</td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td colspan="6">{{item.info}}</td>
+                    </tr>
+                    -->
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--
+<h3>详细信息</h3>
+{% for item in detail %}
+<li>{{ item }}</li>
+{% endfor %}
+-->
+
+{% else %}
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="alert alert-warning">失败： {{failInfo}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-12">
+            <b style="font-size:1.3em">Tips:</b>
+            <ol style="font-size:1.2em">
+                <li>请上传格式为pcap的文件</li>
+                <li>若格式为pcap但仍失败，请尝试使用editcap工具修复文件</li>
+                <li>可能你的文件太太太大了，超出系统的承载能力</li>
+                <li>请提前按照五元组(源IP,目的IP,源端口,目的端口,协议)分割成流文件</li>
+                <li>感谢您的使用！</li>
+            </ol>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>网络流量分析检测系统</title>
+</head>
+
+<body>
+{% load static %}
+<div style="background-image: url({% static 'img/beijing2.jpg' %}); width=100%">
+    <div class="container">
+        <div class="row" style="height:30px"></div>
+        <div class="row ">
+            <div class="col-md-6"><h1 style="color:#FFFFFF">网络流量分析检测系统</h1></div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-8"><h4 style="color:#FFFFFF">在线分析流量基本信息 识别可能攻击</h4></div>
+        </div>
+        <br/>
+        <div class="row" style="height:30px"></div>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div>
+                <b style="font-size:1.3em">系统简介</b>
+                <div style="height:15px"></div>
+                <p style="font-size:1.2em">
+                    本网络流量分析检测系统是一个精简的在线工具，对用户上传的文件流量进行分析，可得出基本的统计信息
+                    （如，IP地址、端口号、网络流持续时间、网络流中数据包个数等）。此外，本系统运用了最新研发的时空感知入侵检测模型(STIDM)
+                    对流量进行分析，发现可能的恶意流量，识别可能的攻击类型。
+                </p>
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <b style="font-size:1.3em">立即体验</b>
+                <div style="height:15px"></div>
+                <p style="font-size:1.2em">上传pcap格式流文件即可得到分析信息</p>
+                <div>
+                    <form class="form-inline" role="form" enctype="multipart/form-data" method="POST"
+                          action="/dealUpload">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="sr-only" for="fileinput">文件输入</label>
+                            <input type="file" id="fileinput" name="file">
+                        </div>
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-3">
+            <div style="height:40px"></div>
+            <div>
+                <a href="https://github.com/Shining20183/IntrusionDetectionSystem" class="thumbnail">
+                    {% load static %}
+                    <img src="{% static 'img/image.png' %}"/>
+                    <div style="padding:10px; font-size:15px;text-align:center">
+                        <span class="glyphicon glyphicon-share"></span>跳转至GitHub
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
