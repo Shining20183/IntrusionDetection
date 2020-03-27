@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03d44f87-09be-41a1-827a-bc4c67e57aca" name="Default Changelist" comment="" />
+    <list default="true" id="03d44f87-09be-41a1-827a-bc4c67e57aca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/IDS/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/IDS/templates/upload.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +101,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
